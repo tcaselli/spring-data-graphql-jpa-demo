@@ -51,8 +51,6 @@ public class GQLExecutorBuilder {
 	/**
 	 * Build the {@link GQLExecutor}
 	 *
-	 * @param gqlErrorProcessor
-	 *            the {@link GQLErrorProcessor}
 	 * @return the built {@link GQLExecutor}
 	 */
 	public GQLExecutor build() {
