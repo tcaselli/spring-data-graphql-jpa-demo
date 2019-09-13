@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.daikit.graphql.data.input.GQLListLoadConfig;
@@ -42,6 +43,8 @@ public class GQLExecutorBuilder {
 	@Autowired
 	private GQLErrorProcessor gqlErrorProcessor;
 	@Autowired
+	private ApplicationContext applicationContext;
+	@Autowired
 	private IEntityService entityService;
 
 	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -55,9 +58,9 @@ public class GQLExecutorBuilder {
 	 */
 	public GQLExecutor build() {
 		logger.debug("START creating GraphQL executor...");
-		final GQLExecutor gqlExecutor = new GQLExecutor(createMetaModel(), gqlErrorProcessor, createExecutorCallback(),
-				createGetByIdDataFetcher(), createListDataFetcher(), createSaveDataFetcher(), createDeleteDataFetcher(),
-				createCustomMethodDataFetcher(), createPropertyDataFetchers());
+		final GQLExecutor gqlExecutor = new GQLExecutor(createMetaModel(applicationContext), gqlErrorProcessor,
+				createExecutorCallback(), createGetByIdDataFetcher(), createListDataFetcher(), createSaveDataFetcher(),
+				createDeleteDataFetcher(), createCustomMethodDataFetcher(), createPropertyDataFetchers());
 		logger.debug("END creating GraphQL executor");
 		return gqlExecutor;
 	}
@@ -66,8 +69,8 @@ public class GQLExecutorBuilder {
 	// PRIVATE UTILS
 	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
-	private GQLMetaModel createMetaModel() {
-		return new GQLMetaModelBuilder().build();
+	private GQLMetaModel createMetaModel(ApplicationContext applicationContext) {
+		return new GQLMetaModelBuilder().build(applicationContext);
 	}
 
 	private IGQLExecutorCallback createExecutorCallback() {

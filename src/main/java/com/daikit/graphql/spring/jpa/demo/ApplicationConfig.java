@@ -8,7 +8,7 @@ import com.daikit.graphql.execution.GQLExecutor;
 
 /**
  * {@link ApplicationConfig} spring component
- * 
+ *
  * @author Thibaut Caselli
  */
 @Configuration
