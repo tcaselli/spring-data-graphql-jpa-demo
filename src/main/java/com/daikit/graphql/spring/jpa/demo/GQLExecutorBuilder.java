@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.daikit.graphql.config.GQLSchemaConfig;
 import com.daikit.graphql.data.input.GQLListLoadConfig;
 import com.daikit.graphql.data.output.GQLDeleteResult;
 import com.daikit.graphql.data.output.GQLExecutionResult;
@@ -41,6 +42,8 @@ public class GQLExecutorBuilder {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
+	private GQLSchemaConfig schemaConfig;
+	@Autowired
 	private GQLErrorProcessor gqlErrorProcessor;
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -58,9 +61,10 @@ public class GQLExecutorBuilder {
 	 */
 	public GQLExecutor build() {
 		logger.debug("START creating GraphQL executor...");
-		final GQLExecutor gqlExecutor = new GQLExecutor(createMetaModel(applicationContext), gqlErrorProcessor,
-				createExecutorCallback(), createGetByIdDataFetcher(), createListDataFetcher(), createSaveDataFetcher(),
-				createDeleteDataFetcher(), createCustomMethodDataFetcher(), createPropertyDataFetchers());
+		final GQLExecutor gqlExecutor = new GQLExecutor(schemaConfig, createMetaModel(applicationContext),
+				gqlErrorProcessor, createExecutorCallback(), createGetByIdDataFetcher(), createListDataFetcher(),
+				createSaveDataFetcher(), createDeleteDataFetcher(), createCustomMethodDataFetcher(),
+				createPropertyDataFetchers());
 		logger.debug("END creating GraphQL executor");
 		return gqlExecutor;
 	}
