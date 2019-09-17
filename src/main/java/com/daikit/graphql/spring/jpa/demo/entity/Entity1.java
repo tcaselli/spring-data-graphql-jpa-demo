@@ -131,7 +131,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param intAttr
 	 *            the intAttr to set
 	 */
-	public void setIntAttr(int intAttr) {
+	public void setIntAttr(final int intAttr) {
 		this.intAttr = intAttr;
 	}
 
@@ -146,7 +146,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param longAttr
 	 *            the longAttr to set
 	 */
-	public void setLongAttr(long longAttr) {
+	public void setLongAttr(final long longAttr) {
 		this.longAttr = longAttr;
 	}
 
@@ -161,7 +161,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param doubleAttr
 	 *            the doubleAttr to set
 	 */
-	public void setDoubleAttr(double doubleAttr) {
+	public void setDoubleAttr(final double doubleAttr) {
 		this.doubleAttr = doubleAttr;
 	}
 
@@ -176,7 +176,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param stringAttr
 	 *            the stringAttr to set
 	 */
-	public void setStringAttr(String stringAttr) {
+	public void setStringAttr(final String stringAttr) {
 		this.stringAttr = stringAttr;
 	}
 
@@ -191,7 +191,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param booleanAttr
 	 *            the booleanAttr to set
 	 */
-	public void setBooleanAttr(boolean booleanAttr) {
+	public void setBooleanAttr(final boolean booleanAttr) {
 		this.booleanAttr = booleanAttr;
 	}
 
@@ -206,7 +206,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param bigIntAttr
 	 *            the bigIntAttr to set
 	 */
-	public void setBigIntAttr(BigInteger bigIntAttr) {
+	public void setBigIntAttr(final BigInteger bigIntAttr) {
 		this.bigIntAttr = bigIntAttr;
 	}
 
@@ -221,7 +221,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param bigDecimalAttr
 	 *            the bigDecimalAttr to set
 	 */
-	public void setBigDecimalAttr(BigDecimal bigDecimalAttr) {
+	public void setBigDecimalAttr(final BigDecimal bigDecimalAttr) {
 		this.bigDecimalAttr = bigDecimalAttr;
 	}
 
@@ -236,7 +236,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param bytesAttr
 	 *            the bytesAttr to set
 	 */
-	public void setBytesAttr(byte[] bytesAttr) {
+	public void setBytesAttr(final byte[] bytesAttr) {
 		this.bytesAttr = bytesAttr;
 	}
 
@@ -251,7 +251,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param shortAttr
 	 *            the shortAttr to set
 	 */
-	public void setShortAttr(short shortAttr) {
+	public void setShortAttr(final short shortAttr) {
 		this.shortAttr = shortAttr;
 	}
 
@@ -266,7 +266,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param charAttr
 	 *            the charAttr to set
 	 */
-	public void setCharAttr(char charAttr) {
+	public void setCharAttr(final char charAttr) {
 		this.charAttr = charAttr;
 	}
 
@@ -281,7 +281,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param dateAttr
 	 *            the dateAttr to set
 	 */
-	public void setDateAttr(Date dateAttr) {
+	public void setDateAttr(final Date dateAttr) {
 		this.dateAttr = dateAttr;
 	}
 
@@ -296,7 +296,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param fileAttr
 	 *            the fileAttr to set
 	 */
-	public void setFileAttr(File fileAttr) {
+	public void setFileAttr(final File fileAttr) {
 		this.fileAttr = fileAttr;
 	}
 
@@ -311,7 +311,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param localDateAttr
 	 *            the localDateAttr to set
 	 */
-	public void setLocalDateAttr(LocalDate localDateAttr) {
+	public void setLocalDateAttr(final LocalDate localDateAttr) {
 		this.localDateAttr = localDateAttr;
 	}
 
@@ -326,7 +326,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param localDateTimeAttr
 	 *            the localDateTimeAttr to set
 	 */
-	public void setLocalDateTimeAttr(LocalDateTime localDateTimeAttr) {
+	public void setLocalDateTimeAttr(final LocalDateTime localDateTimeAttr) {
 		this.localDateTimeAttr = localDateTimeAttr;
 	}
 
@@ -341,7 +341,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param entity2
 	 *            the entity2 to set
 	 */
-	public void setEntity2(Entity2 entity2) {
+	public void setEntity2(final Entity2 entity2) {
 		this.entity2 = entity2;
 	}
 
@@ -356,7 +356,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param entity3s
 	 *            the entity3s to set
 	 */
-	public void setEntity3s(List<Entity3> entity3s) {
+	public void setEntity3s(final List<Entity3> entity3s) {
 		this.entity3s = entity3s;
 	}
 
@@ -371,7 +371,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param entity4s
 	 *            the entity4s to set
 	 */
-	public void setEntity4s(List<Entity4> entity4s) {
+	public void setEntity4s(final List<Entity4> entity4s) {
 		this.entity4s = entity4s;
 	}
 
@@ -386,7 +386,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param embeddedData1
 	 *            the embeddedData1 to set
 	 */
-	public void setEmbeddedData1(EmbeddedData1 embeddedData1) {
+	public void setEmbeddedData1(final EmbeddedData1 embeddedData1) {
 		this.embeddedData1 = embeddedData1;
 	}
 
@@ -401,7 +401,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param embeddedData1s
 	 *            the embeddedData1s to set
 	 */
-	public void setEmbeddedData1s(List<EmbeddedData1> embeddedData1s) {
+	public void setEmbeddedData1s(final List<EmbeddedData1> embeddedData1s) {
 		this.embeddedData1s = embeddedData1s;
 	}
 
@@ -416,7 +416,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param enumAttr
 	 *            the enumAttr to set
 	 */
-	public void setEnumAttr(Enum1 enumAttr) {
+	public void setEnumAttr(final Enum1 enumAttr) {
 		this.enumAttr = enumAttr;
 	}
 
@@ -431,7 +431,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param stringList
 	 *            the stringList to set
 	 */
-	public void setStringList(List<String> stringList) {
+	public void setStringList(final List<String> stringList) {
 		this.stringList = stringList;
 	}
 
@@ -446,7 +446,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param stringSet
 	 *            the stringSet to set
 	 */
-	public void setStringSet(Set<String> stringSet) {
+	public void setStringSet(final Set<String> stringSet) {
 		this.stringSet = stringSet;
 	}
 
@@ -461,7 +461,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param enumList
 	 *            the enumList to set
 	 */
-	public void setEnumList(List<Enum1> enumList) {
+	public void setEnumList(final List<Enum1> enumList) {
 		this.enumList = enumList;
 	}
 
@@ -476,7 +476,7 @@ public class Entity1 extends AbstractEntity {
 	 * @param enumSet
 	 *            the enumSet to set
 	 */
-	public void setEnumSet(Set<Enum1> enumSet) {
+	public void setEnumSet(final Set<Enum1> enumSet) {
 		this.enumSet = enumSet;
 	}
 }

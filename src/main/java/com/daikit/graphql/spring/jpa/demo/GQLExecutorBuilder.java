@@ -73,7 +73,7 @@ public class GQLExecutorBuilder {
 	// PRIVATE UTILS
 	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
-	private GQLMetaModel createMetaModel(ApplicationContext applicationContext) {
+	private GQLMetaModel createMetaModel(final ApplicationContext applicationContext) {
 		return new GQLMetaModelBuilder().build(applicationContext);
 	}
 
