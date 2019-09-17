@@ -127,7 +127,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>.com.daikit</groupId>
+			<groupId>com.daikit</groupId>
 			<artifactId>spring-boot-starter-data-graphql-jpa</artifactId>
 			<version>${spring-boot-starter-data-graphql-jpa.version}</version>
 		</dependency>
