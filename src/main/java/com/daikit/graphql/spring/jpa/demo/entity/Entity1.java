@@ -99,8 +99,8 @@ public class Entity1 extends AbstractEntity {
 	// Relation many to many
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "rel_entity1_2_entity4", joinColumns = {
-			@JoinColumn(name = "entity1_id", nullable = false, updatable = false)}, inverseJoinColumns = {
-					@JoinColumn(name = "entity4_id", nullable = false, updatable = false)})
+			@JoinColumn(name = "entity1_id", nullable = false, updatable = false)}, inverseJoinColumns =
+			{@JoinColumn(name = "entity4_id", nullable = false, updatable = false)})
 	@Fetch(FetchMode.SELECT)
 	private List<Entity4> entity4s = new ArrayList<>();
 
