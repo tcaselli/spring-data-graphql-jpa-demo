@@ -46,25 +46,62 @@ public class GQLMetaModelBuilder {
 	 * @return the built {@link GQLMetaModel}
 	 */
 	public GQLMetaModel build(final ApplicationContext applicationContext) {
-		final Collection<GQLEntityMetaData> entityMetaDatas = Arrays.asList(buildEntity1(), buildEntity2(),
-				buildEntity3(), buildEntity4(), buildEntity5(), buildEntity6(), buildEmbeddedData1(),
-				buildEmbeddedData2(), buildEmbeddedData3());
-		final Collection<GQLEnumMetaData> enumMetaDatas = Arrays.asList(buildEnumMetaData());
+		// This will create data model automatically
+		return buildMetaModelAutomatically(applicationContext);
+		// -> Uncomment this to create data model manually
+		// return buildMetaModelManually(applicationContext);
+	}
 
+	private Collection<IGQLAbstractCustomMethod<?>> createCustomMethods(final ApplicationContext applicationContext) {
+		final Collection<IGQLAbstractCustomMethod<?>> customMethods = applicationContext
+				.getBeansOfType(IGQLAbstractCustomMethod.class, false, false).values().stream()
+				.map(method -> (IGQLAbstractCustomMethod<?>) method).collect(Collectors.toList());
+		return customMethods;
+	}
+
+	private Collection<IGQLAbstractDynamicAttribute<?>> createDynamicAttributes(
+			final ApplicationContext applicationContext) {
 		final Collection<IGQLAbstractDynamicAttribute<?>> dynamicAttributes = applicationContext
 				.getBeansOfType(IGQLAbstractDynamicAttribute.class, false, false).values().stream()
 				.map(dynamicAttribute -> (IGQLAbstractDynamicAttribute<?>) dynamicAttribute)
 				.collect(Collectors.toList());
-		final Collection<IGQLAbstractCustomMethod<?>> customMethods = applicationContext
-				.getBeansOfType(IGQLAbstractCustomMethod.class, false, false).values().stream()
-				.map(method -> (IGQLAbstractCustomMethod<?>) method).collect(Collectors.toList());
-
-		return new GQLMetaModel(enumMetaDatas, entityMetaDatas, dynamicAttributes, customMethods);
+		return dynamicAttributes;
 	}
 
 	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-	// PRIVATE UTILS
+	// PRIVATE UTILS FOR AUTOMATIC BUILD
 	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+	private GQLMetaModel buildMetaModelAutomatically(final ApplicationContext applicationContext) {
+		final Collection<Class<?>> entityClasses = Arrays.asList(Entity1.class, Entity2.class, Entity3.class,
+				Entity4.class, Entity5.class, Entity6.class);
+		final Collection<Class<?>> availableEmbeddedEntityClasses = Arrays.asList(EmbeddedData1.class,
+				EmbeddedData2.class, EmbeddedData3.class);
+		return GQLMetaModel.createFromEntityClasses(entityClasses, availableEmbeddedEntityClasses,
+				createDynamicAttributes(applicationContext), createCustomMethods(applicationContext));
+	}
+
+	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+	// PRIVATE UTILS FOR MANUAL BUILD
+	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+	@SuppressWarnings("unused")
+	private GQLMetaModel buildMetaModelManually(final ApplicationContext applicationContext) {
+		final Collection<GQLEntityMetaData> entityMetaDatas = Arrays.asList(buildEntity1(), buildEntity2(),
+				buildEntity3(), buildEntity4(), buildEntity5(), buildEntity6(), buildEmbeddedData1(),
+				buildEmbeddedData2(), buildEmbeddedData3());
+		final Collection<GQLEnumMetaData> enumMetaDatas = Arrays.asList(buildEnumMetaData());
+		return GQLMetaModel.createFromMetaDatas(enumMetaDatas, entityMetaDatas,
+				createDynamicAttributes(applicationContext), createCustomMethods(applicationContext));
+	}
+
+	// ENUMS
+
+	private GQLEnumMetaData buildEnumMetaData() {
+		return new GQLEnumMetaData(Enum1.class.getSimpleName(), Enum1.class);
+	}
+
+	// ENTITIES
 
 	private GQLEntityMetaData buildEntity1() {
 		final GQLEntityMetaData entity = new GQLEntityMetaData(Entity1.class.getSimpleName(), Entity1.class,
@@ -149,30 +186,29 @@ public class GQLMetaModelBuilder {
 		return entity;
 	}
 
+	// EMBEDDED ENTITIES
+
 	private GQLEntityMetaData buildEmbeddedData1() {
 		final GQLEntityMetaData entity = new GQLEntityMetaData(EmbeddedData1.class.getSimpleName(), EmbeddedData1.class)
 				.setEmbedded(true);
 
-		entity.addAttribute(new GQLAttributeScalarMetaData("intAttr", GQLScalarTypeEnum.INT).setNullable(false));
-		entity.addAttribute(new GQLAttributeScalarMetaData("longAttr", GQLScalarTypeEnum.LONG).setNullable(false));
-		entity.addAttribute(new GQLAttributeScalarMetaData("doubleAttr", GQLScalarTypeEnum.FLOAT).setNullable(false));
+		entity.addAttribute(new GQLAttributeScalarMetaData("intAttr", GQLScalarTypeEnum.INT));
+		entity.addAttribute(new GQLAttributeScalarMetaData("longAttr", GQLScalarTypeEnum.LONG));
+		entity.addAttribute(new GQLAttributeScalarMetaData("doubleAttr", GQLScalarTypeEnum.FLOAT));
 		entity.addAttribute(new GQLAttributeScalarMetaData("stringAttr", GQLScalarTypeEnum.STRING));
-		entity.addAttribute(
-				new GQLAttributeScalarMetaData("booleanAttr", GQLScalarTypeEnum.BOOLEAN).setNullable(false));
+		entity.addAttribute(new GQLAttributeScalarMetaData("booleanAttr", GQLScalarTypeEnum.BOOLEAN));
 		entity.addAttribute(new GQLAttributeScalarMetaData("bigIntAttr", GQLScalarTypeEnum.BIG_INTEGER));
 		entity.addAttribute(new GQLAttributeScalarMetaData("bigDecimalAttr", GQLScalarTypeEnum.BIG_DECIMAL));
 		entity.addAttribute(new GQLAttributeScalarMetaData("bytesAttr", GQLScalarTypeEnum.BYTE));
 
-		final GQLAttributeScalarMetaData shortAttr = new GQLAttributeScalarMetaData("shortAttr",
-				GQLScalarTypeEnum.SHORT);
-		shortAttr.setNullable(false);
-		entity.addAttribute(shortAttr);
+		entity.addAttribute(new GQLAttributeScalarMetaData("shortAttr", GQLScalarTypeEnum.SHORT));
 
 		entity.addAttribute(new GQLAttributeScalarMetaData("charAttr", GQLScalarTypeEnum.CHAR));
 		entity.addAttribute(new GQLAttributeScalarMetaData("dateAttr", GQLScalarTypeEnum.DATE));
 		entity.addAttribute(new GQLAttributeScalarMetaData("fileAttr", GQLScalarTypeEnum.FILE));
 		entity.addAttribute(new GQLAttributeScalarMetaData("localDateAttr", GQLScalarTypeEnum.LOCAL_DATE));
 		entity.addAttribute(new GQLAttributeScalarMetaData("localDateTimeAttr", GQLScalarTypeEnum.LOCAL_DATE_TIME));
+		entity.addAttribute(new GQLAttributeScalarMetaData("instantAttr", GQLScalarTypeEnum.INSTANT));
 		entity.addAttribute(new GQLAttributeListScalarMetaData("stringList", GQLScalarTypeEnum.STRING));
 		entity.addAttribute(new GQLAttributeListScalarMetaData("stringSet", GQLScalarTypeEnum.STRING));
 		entity.addAttribute(new GQLAttributeEnumMetaData("enumAttr", Enum1.class));
@@ -187,18 +223,15 @@ public class GQLMetaModelBuilder {
 	private GQLEntityMetaData buildEmbeddedData2() {
 		final GQLEntityMetaData entity = new GQLEntityMetaData(EmbeddedData2.class.getSimpleName(), EmbeddedData2.class)
 				.setEmbedded(true);
-		entity.addAttribute(new GQLAttributeScalarMetaData("intAttr", GQLScalarTypeEnum.INT).setNullable(false));
+		entity.addAttribute(new GQLAttributeScalarMetaData("intAttr", GQLScalarTypeEnum.INT));
 		return entity;
 	}
 
 	private GQLEntityMetaData buildEmbeddedData3() {
 		final GQLEntityMetaData entity = new GQLEntityMetaData(EmbeddedData3.class.getSimpleName(), EmbeddedData3.class)
 				.setEmbedded(true);
-		entity.addAttribute(new GQLAttributeScalarMetaData("intAttr", GQLScalarTypeEnum.INT).setNullable(false));
+		entity.addAttribute(new GQLAttributeScalarMetaData("intAttr", GQLScalarTypeEnum.INT));
 		return entity;
 	}
 
-	private GQLEnumMetaData buildEnumMetaData() {
-		return new GQLEnumMetaData(Enum1.class.getSimpleName(), Enum1.class);
-	}
 }
